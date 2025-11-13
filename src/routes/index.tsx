@@ -1,18 +1,19 @@
-import { createFileRoute } from "@tanstack/react-router";
-import logo from "../logo.svg";
-import { Link } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router';
+import logo from '../logo.svg';
+import { Link } from '@tanstack/react-router';
+import Titulo from '@/components/titulo/titulo';
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute('/')({
   component: App,
 });
 
 function App() {
   return (
     <div className="text-center">
-      <header className="min-h-screen flex flex-col items-center justify-center bg-[#282c34] text-white text-[calc(10px+2vmin)]">
+      <header className="flex min-h-screen flex-col items-center justify-center bg-[#282c34] text-[calc(10px+2vmin)] text-white">
         <img
           src={logo}
-          className="h-[40vmin] pointer-events-none animate-[spin_20s_linear_infinite]"
+          className="pointer-events-none h-[40vmin] animate-[spin_20s_linear_infinite]"
           alt="logo"
         />
         <p>
@@ -35,7 +36,7 @@ function App() {
           Learn TanStack
         </a>
         <Link to="/teste" className="mt-4 text-[#61dafb] hover:underline">
-          Primeira pagina criada com TanStack Router
+          <Titulo texto="Ir para página de teste" />
         </Link>
       </header>
     </div>
