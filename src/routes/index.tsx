@@ -1,7 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
 import logo from '../logo.svg';
-import { Link } from '@tanstack/react-router';
-import Titulo from '@/components/titulo/titulo';
 
 export const Route = createFileRoute('/')({
   component: App,
@@ -35,9 +33,6 @@ function App() {
         >
           Learn TanStack
         </a>
-        <Link to="/teste" className="mt-4 text-[#61dafb] hover:underline">
-          <Titulo texto="Ir para página de teste" />
-        </Link>
       </header>
     </div>
   );
