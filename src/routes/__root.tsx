@@ -19,7 +19,12 @@ export const Route = createRootRoute({
       <QueryClientProvider client={queryClient}>
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
           <Menu />
-          <Outlet />
+          <main className="flex min-h-screen justify-center overflow-hidden">
+            {/* Container with perspective */}
+            <div className="w-full max-w-11/12 px-6">
+              <Outlet />
+            </div>
+          </main>
           <SeletorTema />
         </ThemeProvider>
         <TanStackDevtools

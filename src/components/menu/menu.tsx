@@ -27,9 +27,9 @@ const Menu = () => {
                   </Link>
                 </NavigationMenuLink>
                 <NavigationMenuLink asChild>
-                  <Link to="/teste" className="flex items-center gap-2">
+                  <Link to="/batalhas" className="flex items-center gap-2">
                     <Swords className="icone" />
-                    Batalha
+                    Batalhas
                   </Link>
                 </NavigationMenuLink>
               </li>
