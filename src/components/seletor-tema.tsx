@@ -8,9 +8,13 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useTheme } from '@/components/config-tema';
+import { useEffect } from 'react';
 
 export function SeletorTema() {
   const { setTheme } = useTheme();
+  useEffect(() => {
+    setTheme('system');
+  }, []);
 
   return (
     <div className="fixed top-0 right-0 z-90 p-4 pr-9">
