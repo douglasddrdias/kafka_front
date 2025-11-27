@@ -14,7 +14,7 @@ export function useApiPersonagem() {
     });
   };
   const listarPersonagensPaginado = (itemsPorPagina: number = 20) => {
-    const { data, isLoading, error } = useQuery({
+    const { data, isLoading, error, refetch } = useQuery({
       queryKey: ['personagens', paginaAtual],
       queryFn: () => apiRequest<Personagem[]>('/personagem'),
       gcTime: 15 * 60 * 1000,
@@ -45,6 +45,8 @@ export function useApiPersonagem() {
       }
     };
 
+    const possuiPersonagens = personagensPaginados.length > 0;
+
     return {
       personagens: personagensPaginados,
       totalPaginas,
@@ -54,8 +56,16 @@ export function useApiPersonagem() {
       proximaPagina,
       paginaAnterior,
       irParaPagina,
+      possuiPersonagens,
+      refetch,
     };
   };
 
-  return { listarPersonagens, listarPersonagensPaginado };
+  const gerarPersonagens = async () => {
+    await apiRequest('/swapi');
+    listarPersonagens().refetch();
+    listarPersonagensPaginado().refetch();
+  };
+
+  return { listarPersonagens, listarPersonagensPaginado, gerarPersonagens };
 }

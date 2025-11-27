@@ -11,11 +11,13 @@ import { AnimatePresence, motion } from 'motion/react';
 interface CartaoPersonagemProps {
   personagem: Personagem;
   className?: string;
+  aoClickar?: (personagem: Personagem) => void;
 }
 
 export default function CartaoPersonagem({
   personagem: p,
   className,
+  aoClickar,
 }: CartaoPersonagemProps) {
   const informacao = (titulo: string, informacao: string | null) => {
     const valor = informacao ?? '-';
@@ -28,6 +30,12 @@ export default function CartaoPersonagem({
   };
 
   const imagem = p.urlImagem ? p.urlImagem : 'grougu.jpg';
+
+  const acionarClick = () => {
+    if (aoClickar) {
+      aoClickar(p);
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -53,6 +61,7 @@ export default function CartaoPersonagem({
             backgroundImage: `url("${imagem}")`,
             boxShadow: '0 4px 20px var(--card)',
           }}
+          onClick={() => acionarClick()}
         >
           <CardHeader className="relative z-10 text-center">
             <CardTitle className="texto-secundario uppercase">

@@ -1,5 +1,6 @@
 import CartaoPersonagem from '@/components/cartao-personage/cartao-personagem';
 import Titulo from '@/components/titulo/titulo';
+import { Button, buttonVariants } from '@/components/ui/button';
 import {
   Pagination,
   PaginationContent,
@@ -24,6 +25,7 @@ export default function Inicio() {
     proximaPagina,
     paginaAnterior,
     irParaPagina,
+    possuiPersonagens,
   } = api.listarPersonagensPaginado();
 
   if (isLoading)
@@ -118,24 +120,39 @@ export default function Inicio() {
         <Titulo texto="Personagens" />
       </div>
 
-      {paginacao()}
-      <div className="perspective mt-12 mb-8">
-        <div className="grid grid-cols-2 gap-6 p-4 pl-6 lg:grid-cols-4">
-          {personagens?.map((personagem) => (
-            <AnimatePresence mode="sync" key={`pre${personagem.id}`}>
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 50 }}
-                transition={{ duration: 0.6 }}
-                key={`div${personagem.id}`}
-              >
-                <CartaoPersonagem key={personagem.id} personagem={personagem} />
-              </motion.div>
-            </AnimatePresence>
-          ))}
+      {!possuiPersonagens && (
+        <div className="mt-20 flex justify-center">
+          <Button onClick={() => api.gerarPersonagens()} disabled={isLoading}>
+            Gerar Personagens
+          </Button>
         </div>
-      </div>
+      )}
+
+      {possuiPersonagens && (
+        <>
+          {paginacao()}
+          <div className="perspective mt-12 mb-8">
+            <div className="grid grid-cols-2 gap-6 p-4 pl-6 lg:grid-cols-4">
+              {personagens?.map((personagem) => (
+                <AnimatePresence mode="sync" key={`pre${personagem.id}`}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 50 }}
+                    transition={{ duration: 0.6 }}
+                    key={`div${personagem.id}`}
+                  >
+                    <CartaoPersonagem
+                      key={personagem.id}
+                      personagem={personagem}
+                    />
+                  </motion.div>
+                </AnimatePresence>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 }
